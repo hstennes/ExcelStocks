@@ -1,15 +1,11 @@
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Set;
 
 public class ExcelWriter {
 
@@ -32,7 +28,6 @@ public class ExcelWriter {
                 row.createCell(row.getLastCellNum()).setCellValue(data.get(str).doubleValue());
             }
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             while(rowIterator.hasNext()){
                 Row row = rowIterator.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
@@ -41,7 +36,7 @@ public class ExcelWriter {
                         Cell cell = row.createCell(row.getLastCellNum());
                         cell.setCellValue(new Date());
                         CellStyle dateStyle = workbook.createCellStyle();
-                        dateStyle.setDataFormat(creationHelper.createDataFormat().getFormat("mm/dd/yyyy"));
+                        dateStyle.setDataFormat(creationHelper.createDataFormat().getFormat("m/d/yyyy"));
                         cell.setCellStyle(dateStyle);
                     }
                 }
