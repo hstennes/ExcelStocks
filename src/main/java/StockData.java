@@ -14,6 +14,7 @@ public class StockData extends HashMap<String, BigDecimal> {
 
     public void retrieveData(){
         for(String symbol : symbols){
+            System.out.println(symbol);
             try {
                 put(symbol, YahooFinance.get(symbol).getQuote().getPrice());
             } catch (IOException e){
