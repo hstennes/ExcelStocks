@@ -1,3 +1,4 @@
+import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
 import java.io.IOException;
@@ -14,12 +15,17 @@ public class StockData extends HashMap<String, BigDecimal> {
 
     public void retrieveData(){
         for(String symbol : symbols){
-            System.out.println(symbol);
             try {
-                put(symbol, YahooFinance.get(symbol).getQuote().getPrice());
+                Stock stock = YahooFinance.get(symbol);
+                if(stock == null) put(symbol, new BigDecimal(0));
+                else put(symbol, stock.getQuote().getPrice());
             } catch (IOException e){
                 e.printStackTrace();
             }
         }
+    }
+
+    public String[] getSymbols(){
+        return symbols;
     }
 }
